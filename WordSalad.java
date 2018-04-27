@@ -138,9 +138,15 @@ public class WordSalad implements Iterable<String> {
         return split;
     }
 
-    //working
+    /**
+     * Helper function to remove a WordNode from
+     * the WordSalad. Covers special case of first
+     * being target.
+     * @param target the WordNode to be removed
+     */
     private void remove(WordNode target) {
         //special case of the target being the first node
+        //redefine first as the next in the linked list
         if (first.equals(target)) {
             this.first = this.first.next;
             return;
@@ -160,6 +166,15 @@ public class WordSalad implements Iterable<String> {
 
     // need to throw exception for 0 and negative
     //working
+
+    /**
+     * A helper method to generate the size of the WordSalad
+     * array needed to split a WordSalad object with count k.
+     *
+     * @param length the length of the WordSalad to be split
+     * @param k the count to split the WordSalad with
+     * @return an integer representing the size of the array
+     */
     private int arraySize(double length, int k) {
         if (k <= 0) {
             //throw exception? something else?
@@ -175,6 +190,13 @@ public class WordSalad implements Iterable<String> {
     }
 
     //working
+
+    /**
+     * Helper method to give the number of WordNodes
+     * in a WordSalad object. Covers special case
+     * of WordSalad being empty.
+     * @return the size of the WordSalad object.
+     */
     private int count() {
         //special case of WordSalad being empty
         if (this.first == null) {
@@ -192,6 +214,16 @@ public class WordSalad implements Iterable<String> {
     }
 
     //working
+
+    /**
+     * Helper method to jump through a WordSalad object k times,
+     * and return the WordNode reached.
+     * I.e. start at one WordNode and traverse the links for
+     * k WordNodes and then return.
+     * @param curr the WordNode to start traversing at
+     * @param k the number of WordNodes to jump forward
+     * @return the WordNode reached at the end of jumping forward
+     */
     private static WordNode jumpForward(WordNode curr, int k) {
         WordNode c = curr;
         for (int i = 0; (c.next != null) && (i < k); i++) {
@@ -208,6 +240,15 @@ public class WordSalad implements Iterable<String> {
         return null;
     }
 
+    /**
+     * Method to recombine a WordSalad array into a single WordSalad
+     * object with a given count of k.
+     * Works backwards through the blocks array adding
+     * Inverse of split().
+     * @param blocks
+     * @param k
+     * @return the recombined WordSalad
+     */
     public static WordSalad recombine(WordSalad[] blocks, int k) {
         int arraySize = blocks.length;
         WordSalad recombined = new WordSalad();
@@ -234,6 +275,12 @@ public class WordSalad implements Iterable<String> {
         return recombined;
     }
 
+    /**
+     * Helper method for recombine to link a WordNode to a specified
+     * WordNode in the WordSalad.
+     * @param target the WordNode to be linked from
+     * @param toAdd the WordNode to be linked to the target
+     */
     public static void addNext(WordNode target , WordNode toAdd) {
         toAdd.next = target.next;
         target.next = toAdd;
